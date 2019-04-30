@@ -10,8 +10,8 @@ class Problem(models.Model):
     exTestCaseOutput = models.TextField(verbose_name='exampleTestCaseOutput')
     serverTestCaseInput = models.TextField()
     serverTestCaseOutput = models.TextField()
-    numOfTry = models.IntegerField()
-    numOfRight = models.IntegerField()
+    numOfTry = models.IntegerField(default=0)
+    numOfRight = models.IntegerField(default=0)
     image = models.ImageField()
     answerFile =models.FileField()
 

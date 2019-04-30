@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} {{ problem.title }}{% endblock %}
+{% block content %}
+
+<h1>{{ problem.title }}</h1>
+<h2>문제 설명</h2>
+<div>{{ problem.content }}</div>
+<h3>입력</h3>
+<textarea>{{ problem.exTestCaseInput }}</textarea>
+<h3>출력</h3>
+<textarea>{{ problem.exTestCaseOutput }}</textarea>
+<h3>시도 횟수</h3>
+<div>{{ problem.numOfTry }}</div>
+<h3>맞은 사람</h3>
+<div>{{ problem.numOfRight }}</div>
+
+{% endblock  %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} - 문제보기{% endblock %}
+{% block content %}
+{% if problemList %}
+    <ul>
+    {% for problem in problemList %}
+        <li><a href="{% url 'problem:detail' problem.id %}">{{ problem.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>문제가 없습니다.문제를 추가하세요</p>
+{% endif %}
+{% endblock %}
