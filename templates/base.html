@@ -20,16 +20,21 @@
                 <li class="nav-item"><a href="/" class="active nav-link ">Home</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a href="#" class="nav-link">Welcome, {{user.get_username}}</a></li>
-                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">로그아웃</a></li>
                 {% else %}
 
-                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Signup</a></li>
+                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">로그인</a></li>
+                <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">회원가입</a></li>
                 {% endif %}
+                <li class="nav-item"><a href="{% url 'notice:noticeList' %}" class="nav-link">공지사항</a></li>
+                <li class="nav-item"><a href="{% url 'problem:problemList' %}" class="nav-link">문제풀이</a></li>
+
             </ul>
         </nav>
     </header>
+
     {% block content %}
+
     {% endblock %}
 
     <footer class="footer">
