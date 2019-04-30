@@ -6,8 +6,8 @@ from django.utils import timezone
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=20, unique=True, primary_key=True, validators=[RegexValidator(regex='^[a-zA-Z0-9]+$')])
-    fullName = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, unique=True, primary_key=True, validators=[RegexValidator(regex='^[a-zA-Z0-9]+$')],verbose_name='사용자 아이디')
+    fullName = models.CharField(max_length=20,verbose_name='이름')
 
 
 class ProblemsByUser(models.Model):

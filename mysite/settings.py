@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR), "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'OJ',
         'USER': 'OJ',
         'PASSWORD': 'OJ',
-        'HOST': '192.168.0.9',
+        'HOST': 'graduate.iptime.org',
         'PORT': '3306'
     }
 }
@@ -108,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -126,3 +126,6 @@ STATIC_URL = '/static/'
 
 # 커스텀 유저
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# 로그인시 여기로 가라
+LOGIN_REDIRECT_URL = '/'
