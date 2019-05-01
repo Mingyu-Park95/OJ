@@ -14,4 +14,12 @@
 <h3>맞은 사람</h3>
 <div>{{ problem.numOfRight }}</div>
 
+
+
+<form action="{% url 'problem:check' problem.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
 {% endblock  %}
