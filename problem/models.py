@@ -12,6 +12,7 @@ class Problem(models.Model):
     serverTestCaseOutput = models.TextField()
     numOfTry = models.IntegerField(default=0)
     numOfRight = models.IntegerField(default=0)
+    ratio = models.FloatField(default=0)
     image = models.ImageField()
     answerFile =models.FileField()
 

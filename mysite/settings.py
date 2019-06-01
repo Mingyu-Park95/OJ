@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
+import site
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,12 +29,14 @@ SECRET_KEY = '_#3oh6=8okloc*%lf8h5y5ua)k=1zs7kk1$j^r0&dmdk&0moj5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'dash',
+    'rank',
     'accounts',
     'notice',
     'problem',
@@ -121,13 +127,15 @@ USE_L10N = True
 USE_TZ = False
 
 
-# Static files (CSS, JavaScript, Images)
+# q files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 커스텀 유저
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # 로그인시 여기로 가라
 LOGIN_REDIRECT_URL = '/'
+
+# 외부접속

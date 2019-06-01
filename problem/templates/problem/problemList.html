@@ -1,13 +1,128 @@
 {% extends 'base.html' %}
 {% block title %} - 문제보기{% endblock %}
 {% block content %}
+
 {% if problemList %}
-    <ul>
-    {% for problem in problemList %}
-        <li><a href="{% url 'problem:detail' problem.id %}">{{ problem.title }}</a></li>
-    {% endfor %}
-    </ul>
+    <table border="1" id ="myTable">
+        <tr>
+            <th onclick="sortTable(0)">문제 번호</th>
+            <th onclick="sortTableStr(1)">문제 이름</th>
+            <th onclick="sortTable(2)">맞은 사람</th>
+            <th onclick="sortTable(3)">제출</th>
+            <th onclick="sortTable(4)">정답 비율</th>
+        </tr>
+        {% for problem in problemList %}
+        <tr>
+            <td>{{problem.id}}</td>
+            <td><a href="{% url 'problem:detail' problem.id %}">{{ problem.title }}</a></td>
+            <td>{{problem.numOfRight}}</td>
+            <td>{{problem.numOfTry}}</td>
+            <td>{{ problem.ratio }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
 {% else %}
+
     <p>문제가 없습니다.문제를 추가하세요</p>
 {% endif %}
+
+
+<script>
+    // 문자 정렬
+    function sortTableStr(n) {
+        var table, rows, flag1, i, x, y, flag2, dir, check = 0;
+        table = document.getElementById("myTable");
+        flag1 = true;
+
+        dir = "asc"; // 처음 정렬방향은 오름차순으로 설정
+
+        while (flag1) { // 찾을 때 까지 while문
+            flag1 = false;
+            rows = table.rows;
+
+            for (i = 1; i < rows.length - 1; i++) { // 테이블 헤더인 첫번째 행을 제외하고 정렬
+                flag2 = false; // flag2는 현재값과 다음값이 교환이 가능 한지만 확인
+
+                x = rows[i].getElementsByTagName("TD")[n]; // 현재와 다음행 비교하기위해 x에는 현재값, y에는 다음값 저장
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                x = x.getElementsByTagName("A");
+                y = y.getElementsByTagName("A");
+
+                if (dir == "asc") { // 오름차순이 가능한지만 확인
+                    if (x[0].innerHTML > y[0].innerHTML) {
+                        flag2 = true;
+                        break;
+                    }
+                } else if (dir == "desc") { // 내림차순이 가능한지만 확인
+                    if (x[0].innerHTML < y[0].innerHTML) {
+                        flag2 = true;
+                        break;
+                    }
+                }
+            }
+
+            if (flag2) { // 여기서 오름차순이나 내림차순 실행
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                flag1 = true;
+                check++; // 오름차순을 했는지 체크하고 다음번에 내림차순을 하기위해 체크해두는 C에서 사용하는 bool변수 느낌
+            } else { // 전에 오름차순을 했을 시, 내림차순으로 함
+                if (check == 0 && dir == "asc") {
+                    dir = "desc";
+                    flag1 = true;
+                }
+            }
+        }
+    }
+
+    // 숫자 정렬
+    function sortTable(n) {
+        var table, rows, flag1, i, x, y, flag2, dir, check = 0;
+
+        table = document.getElementById("myTable");
+        flag1 = true;
+        dir = "asc";
+
+        while (flag1) {
+            flag1 = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                flag2 = false;
+
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                if (dir == "asc") {
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        flag2 = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        flag2 = true;
+                        break;
+                    }
+                }
+            }
+
+            if (flag2) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                flag1 = true;
+                check++;
+            } else {
+                if (check == 0 && dir == "asc") {
+                    dir = "desc";
+                    flag1 = true;
+                }
+            }
+        }
+    }
+</script>
+
+
+
 {% endblock %}
+
